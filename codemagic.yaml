@@ -12,11 +12,10 @@ scripts:
       cd src
       pod install
 
-  - name: Build iOS (no signing)
+  - name: Build iOS
     script: |
       cd src
-      xcodebuild \
-      -workspace imsakiye.xcworkspace \
+      xcodebuild -workspace imsakiye.xcworkspace \
       -scheme imsakiye \
       -configuration Release \
       -sdk iphoneos \
