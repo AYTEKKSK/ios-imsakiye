@@ -11,17 +11,19 @@ workflows:
           cd src
           pod install
 
-      - name: Build iOS
+      - name: Build IPA
         script: |
           cd src
-          xcodebuild build \
-          -workspace imsakiye.xcworkspace \
+          xcodebuild -workspace imsakiye.xcworkspace \
           -scheme imsakiye \
-          -sdk iphoneos \
           -configuration Release \
-          CODE_SIGN_IDENTITY="" \
-          CODE_SIGNING_REQUIRED=NO \
-          CODE_SIGNING_ALLOWED=NO
+          -sdk iphoneos \
+          -archivePath build/imsakiye.xcarchive archive
+
+          xcodebuild -exportArchive \
+          -archivePath build/imsakiye.xcarchive \
+          -exportPath build \
+          -allowProvisioningUpdates
 
     artifacts:
-      - src/build/**/*.ipa
+      - src/build/*.ipa
