@@ -3,12 +3,11 @@ workflows:
     name: iOS Workflow
     environment:
       xcode: latest
+
     scripts:
-      - name: Install dependencies
-        script: |
-          pod install
-      - name: Build iOS
+      - name: Build ios
         script: |
           xcodebuild build -workspace src/imsakiye.xcworkspace -scheme imsakiye
+
     artifacts:
       - build/ios/**/*.ipa
