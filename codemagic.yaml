@@ -25,10 +25,11 @@ workflows:
       - name: Export IPA
         script: |
           cd src
+          mkdir -p build
           xcodebuild -exportArchive \
           -archivePath build/imsakiye.xcarchive \
-          -exportPath build \
-          -allowProvisioningUpdates
+          -exportOptionsPlist ExportOptions.plist \
+          -exportPath build
 
     artifacts:
-      - src/build/*.ipa
+      - src/build/**/*.ipa
