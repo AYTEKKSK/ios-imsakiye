@@ -11,19 +11,23 @@ workflows:
           cd src
           pod install
 
-      - name: Build IPA
+      - name: Build iOS archive
         script: |
           cd src
           xcodebuild -workspace imsakiye.xcworkspace \
           -scheme imsakiye \
           -configuration Release \
           -sdk iphoneos \
-          -archivePath build/imsakiye.xcarchive archive
+          -archivePath build/imsakiye.xcarchive \
+          archive
 
+      - name: Export IPA
+        script: |
+          cd src
           xcodebuild -exportArchive \
           -archivePath build/imsakiye.xcarchive \
-          -exportPath build \
-          -allowProvisioningUpdates
+          -exportOptionsPlist ExportOptions.plist \
+          -exportPath build
 
     artifacts:
       - src/build/*.ipa
