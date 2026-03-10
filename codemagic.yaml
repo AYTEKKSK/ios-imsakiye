@@ -18,6 +18,7 @@ workflows:
           -scheme imsakiye \
           -configuration Release \
           -sdk iphoneos \
+          -destination 'generic/platform=iOS' \
           -archivePath build/imsakiye.xcarchive \
           archive
 
@@ -26,8 +27,8 @@ workflows:
           cd src
           xcodebuild -exportArchive \
           -archivePath build/imsakiye.xcarchive \
-          -exportOptionsPlist ExportOptions.plist \
-          -exportPath build
+          -exportPath build \
+          -allowProvisioningUpdates
 
     artifacts:
       - src/build/*.ipa
